@@ -1,0 +1,59 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    commit.stack.appsody.dev/author: Bright Zheng <bright.zheng@outlook.com>
+    commit.stack.appsody.dev/committer: Bright Zheng <bright.zheng@outlook.com>
+    commit.stack.appsody.dev/date: Mon Feb 17 22:15:56 2020 +0700
+    commit.stack.appsody.dev/message: add H2 web-allow-others
+    image.opencontainers.org/created: "2020-03-25T12:00:39+08:00"
+    stack.appsody.dev/authors: Bright Zheng <bright.zheng@outlook.com>
+    stack.appsody.dev/configured: docker.io/itstarting/springboot-swagger-jpa:0.1
+    stack.appsody.dev/created: "2020-03-23T17:22:48+08:00"
+    stack.appsody.dev/description: A Stack managed by Maven, with Spring Boot, Swagger,
+      JPA
+    stack.appsody.dev/documentation: https://github.com/brightzheng100/springboot-swagger-jpa-appsody-stack/tree/master/README.md
+    stack.appsody.dev/licenses: Apache-2.0
+    stack.appsody.dev/revision: cde54f88bdd632ade99b63e3dc6be2971936e992
+    stack.appsody.dev/source: https://github.com/brightzheng100/springboot-swagger-jpa-appsody-stack/tree/master/image
+    stack.appsody.dev/tag: docker.io/itstarting/springboot-swagger-jpa:0.1.0
+    stack.appsody.dev/title: springboot-swagger-jpa
+    stack.appsody.dev/url: https://github.com/brightzheng100/springboot-swagger-jpa-appsody-stack
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: spring-boot-demo
+    stack.appsody.dev/id: springboot-swagger-jpa
+    stack.appsody.dev/version: 0.1.0
+  name: spring-boot-demo
+spec:
+  applicationImage: registry:5000/spring-boot-demo:0.1.0
+  createKnativeService: false
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  monitoring:
+    endpoints:
+    - path: /actuator/prometheus
+    labels:
+      k8s-app: spring-boot-demo
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+    timeoutSeconds: 1
+  service:
+    annotations:
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/scrape: "true"
+    port: 8080
+    type: ClusterIP
+  stack: springboot-swagger-jpa
+  version: 1.0.0

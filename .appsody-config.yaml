@@ -1,0 +1,2 @@
+project-name: spring-boot-demo
+stack: docker.io/itstarting/springboot-swagger-jpa:0.1
